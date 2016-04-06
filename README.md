@@ -10,7 +10,7 @@ A Simple HUD for iOS 8 and up
 # Installation
 
 ```
-pod 'HUD'
+pod 'HUD', '~>1.1.0'
 ```
 
 # Using
