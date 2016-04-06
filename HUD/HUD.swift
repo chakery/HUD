@@ -16,8 +16,8 @@ public enum HUDType {
     case none
 }
 
-extension HUD {
-    class func show(type: HUDType, text: String, time: NSTimeInterval? = nil, completion: (Void -> Void)? = nil) {
+public extension HUD {
+    public class func show(type: HUDType, text: String, time: NSTimeInterval? = nil, completion: (Void -> Void)? = nil) {
         dismiss()
         var isNone: Bool = false
         let window = UIWindow()
@@ -107,7 +107,7 @@ extension HUD {
         delayDismiss(time, completion: completion)
     }
     
-    class func dismiss() {
+    public class func dismiss() {
         let _ = windowTemp?.subviews.map {
             $0.removeFromSuperview()
         }
@@ -116,7 +116,7 @@ extension HUD {
     }
 }
 
-class HUD: NSObject {
+public class HUD: NSObject {
     private static var windowTemp: UIWindow?
     private static let rv = UIApplication.sharedApplication().keyWindow?.subviews.first as UIView!
     private struct Cache {
