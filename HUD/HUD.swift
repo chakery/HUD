@@ -18,7 +18,7 @@ public enum HUDType {
 
 public extension HUD {
     public class func show(type: HUDType, text: String, time: NSTimeInterval? = nil, completion: (Void -> Void)? = nil) {
-        dismiss()
+        instance.registerDeviceOrientationNotification()
         var isNone: Bool = false
         let window = UIWindow()
         window.backgroundColor = UIColor.clearColor()
@@ -108,6 +108,7 @@ public extension HUD {
     }
     
     public class func dismiss() {
+        instance.removeDeviceOrientationNotification()
         let _ = windowTemp?.subviews.map {
             $0.removeFromSuperview()
         }
@@ -118,7 +119,7 @@ public extension HUD {
 
 public class HUD: NSObject {
     private static var windowTemp: UIWindow?
-    private static let rv = UIApplication.sharedApplication().keyWindow?.subviews.first as UIView!
+    private static let instance: HUD = HUD()
     private struct Cache {
         static var imageOfCheckmark: UIImage?
         static var imageOfCross: UIImage?
@@ -127,8 +128,9 @@ public class HUD: NSObject {
     
     // center
     private class func getCenter() -> CGPoint {
+        let rv = UIApplication.sharedApplication().keyWindow?.subviews.first as UIView!
         if rv.bounds.width > rv.bounds.height {
-            return CGPoint(x: rv.bounds.width/2, y: rv.bounds.height/2)
+            return CGPoint(x: rv.bounds.height/2, y: rv.bounds.width/2)
         }
         return rv.center
     }
@@ -142,6 +144,35 @@ public class HUD: NSObject {
             dismiss()
             completion?()
         }
+    }
+    
+    // register notification
+    private func registerDeviceOrientationNotification() {
+        NSNotificationCenter.defaultCenter().addObserver(HUD.instance, selector: #selector(HUD.transformWindow(_:)), name: UIDeviceOrientationDidChangeNotification, object: nil)
+    }
+    
+    // remove notification
+    private func removeDeviceOrientationNotification() {
+        NSNotificationCenter.defaultCenter().removeObserver(HUD.instance)
+    }
+    
+    // transform
+    @objc private func transformWindow(notification: NSNotification) {
+        var rotation: CGFloat = 0
+        switch UIDevice.currentDevice().orientation {
+        case .Portrait:
+            rotation = 0
+        case .PortraitUpsideDown:
+            rotation = CGFloat(M_PI)
+        case .LandscapeLeft:
+            rotation = CGFloat(M_PI/2)
+        case .LandscapeRight:
+            rotation = CGFloat(M_PI + (M_PI/2))
+        default:
+            break
+        }
+        HUD.windowTemp?.center = HUD.getCenter()
+        HUD.windowTemp?.transform = CGAffineTransformMakeRotation(rotation)
     }
     
     // draw
