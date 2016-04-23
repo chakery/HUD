@@ -1,30 +1,41 @@
 # HUD
-A Simple HUD for iOS 8 and up
+A Simple HUD for iOS 8 and up, Support screen rotation.
 
-<img src="https://raw.githubusercontent.com/Chakery/HUD/master/images/loading.png" width="150px" />
-<img src="https://raw.githubusercontent.com/Chakery/HUD/master/images/success.png" width="150px" />
-<img src="https://raw.githubusercontent.com/Chakery/HUD/master/images/error.png" width="150px" />
-<img src="https://raw.githubusercontent.com/Chakery/HUD/master/images/info.png" width="150px" />
-<img src="https://raw.githubusercontent.com/Chakery/HUD/master/images/text.png" width="150px" />
+<img src="https://raw.githubusercontent.com/Chakery/HUD/master/HUDExample/gif.gif" width="150px" />
 
 # Installation
 
 ```
-pod 'HUD', '~>1.1.0'
+pod 'HUD', '~>1.2.0'
 ```
 
 # Using
 
 ```
 // show
-HUD.show(.loading, text: "Loading...")
-HUD.show(.success, text: "Success")
-HUD.show(.none, text: "Text...")
+HUD.show(.Loading, text: "Loading")
+HUD.show(.Success, text: "Success")
+HUD.show(.Error, text: "Error")
+HUD.show(.Info, text: "Warning")
+HUD.show(.None, text: "Text")
+
 
 // timed dismiss
-HUD.show(.loading, text: "Loading...", time: 3) { _ in
-            print("Loading completed")
-        }
+HUD.show(.Loading, text: "Loading", time: 3) { _ in
+    print("Loading completed")
+}
+HUD.show(.Success, text: "success", time: 3) { _ in
+    print("Success completed")
+}
+HUD.show(.Error, text: "error", time: 3) { _ in
+    print("Error completed")
+}
+HUD.show(.Info, text: "Warning", time: 3) { _ in
+    print("Warning completed")
+}
+HUD.show(.None, text: "Text", time: 3) { _ in
+    print("Text completed")
+}
 
 
 // dismiss
