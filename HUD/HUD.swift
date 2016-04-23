@@ -9,15 +9,16 @@
 import UIKit
 
 public enum HUDType {
-    case loading
-    case success
-    case error
-    case info
-    case none
+    case Loading
+    case Success
+    case Error
+    case Info
+    case None
 }
 
 public extension HUD {
     public class func show(type: HUDType, text: String, time: NSTimeInterval? = nil, completion: (Void -> Void)? = nil) {
+        instance.removeDeviceOrientationNotification()
         instance.registerDeviceOrientationNotification()
         var isNone: Bool = false
         let window = UIWindow()
@@ -30,31 +31,31 @@ public extension HUD {
         var headView = UIView()
         
         switch type {
-        case .success:
+        case .Success:
             image = imageOfCheckmark
-        case .error:
+        case .Error:
             image = imageOfCross
-        case .info:
+        case .Info:
             image = imageOfInfo
         default:
             break
         }
         
         switch type {
-        case .loading:
+        case .Loading:
             headView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
             (headView as! UIActivityIndicatorView).startAnimating()
             headView.translatesAutoresizingMaskIntoConstraints = false
             mainView.addSubview(headView)
-        case .success:
+        case .Success:
             fallthrough
-        case .error:
+        case .Error:
             fallthrough
-        case .info:
+        case .Info:
             headView = UIImageView(image: image)
             headView.translatesAutoresizingMaskIntoConstraints = false
             mainView.addSubview(headView)
-        case .none:
+        case .None:
             isNone = true
         }
         
@@ -185,20 +186,20 @@ public class HUD: NSObject {
         checkmarkShapePath.closePath()
         
         switch type {
-        case .success: // draw checkmark
+        case .Success: // draw checkmark
             checkmarkShapePath.moveToPoint(CGPointMake(10, 18))
             checkmarkShapePath.addLineToPoint(CGPointMake(16, 24))
             checkmarkShapePath.addLineToPoint(CGPointMake(27, 13))
             checkmarkShapePath.moveToPoint(CGPointMake(10, 18))
             checkmarkShapePath.closePath()
-        case .error: // draw X
+        case .Error: // draw X
             checkmarkShapePath.moveToPoint(CGPointMake(10, 10))
             checkmarkShapePath.addLineToPoint(CGPointMake(26, 26))
             checkmarkShapePath.moveToPoint(CGPointMake(10, 26))
             checkmarkShapePath.addLineToPoint(CGPointMake(26, 10))
             checkmarkShapePath.moveToPoint(CGPointMake(10, 10))
             checkmarkShapePath.closePath()
-        case .info:
+        case .Info:
             checkmarkShapePath.moveToPoint(CGPointMake(18, 6))
             checkmarkShapePath.addLineToPoint(CGPointMake(18, 22))
             checkmarkShapePath.moveToPoint(CGPointMake(18, 6))
@@ -226,7 +227,7 @@ public class HUD: NSObject {
         }
         UIGraphicsBeginImageContextWithOptions(CGSizeMake(36, 36), false, 0)
         
-        HUD.draw(.success)
+        HUD.draw(.Success)
         
         Cache.imageOfCheckmark = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -238,7 +239,7 @@ public class HUD: NSObject {
         }
         UIGraphicsBeginImageContextWithOptions(CGSizeMake(36, 36), false, 0)
         
-        HUD.draw(.error)
+        HUD.draw(.Error)
         
         Cache.imageOfCross = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -250,7 +251,7 @@ public class HUD: NSObject {
         }
         UIGraphicsBeginImageContextWithOptions(CGSizeMake(36, 36), false, 0)
         
-        HUD.draw(.info)
+        HUD.draw(.Info)
         
         Cache.imageOfInfo = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

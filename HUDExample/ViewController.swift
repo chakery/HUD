@@ -11,24 +11,24 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBAction func loadingHandler(sender: AnyObject) {
-        HUD.show(.loading, text: "Loading...")
+        HUD.show(.Loading, text: "Loading...")
     }
     
     @IBAction func successHandler(sender: AnyObject) {
-        HUD.show(.success, text: "Success")
+        HUD.show(.Success, text: "Success")
     }
     
     @IBAction func errorHandler(sender: AnyObject) {
-        HUD.show(.error, text: "Error")
+        HUD.show(.Error, text: "Error")
     }
    
     
     @IBAction func infohandler(sender: AnyObject) {
-        HUD.show(.info, text: "Warning")
+        HUD.show(.Info, text: "Warning")
     }
     
     @IBAction func textHandler(sender: AnyObject) {
-        HUD.show(.none, text: "Text...")
+        HUD.show(.None, text: "Text...")
     }
     
     @IBAction func dismissHandler(sender: AnyObject) {
