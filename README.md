@@ -1,7 +1,6 @@
 # HUD
 A Simple HUD for iOS 8 and up, Support screen rotation.
-
-<img src="https://raw.githubusercontent.com/Chakery/HUD/master/HUDExample/gif.gif" width="150px" />
+![image](https://raw.githubusercontent.com/Chakery/HUD/master/HUDExample/gif.gif)
 
 # Installation
 
