@@ -8,6 +8,9 @@
 
 import UIKit
 
+
+public typealias HUDCompletedBlock = Void -> Void
+
 public enum HUDType {
     case Loading
     case Success
@@ -17,8 +20,8 @@ public enum HUDType {
 }
 
 public extension HUD {
-    public class func show(type: HUDType, text: String, time: NSTimeInterval? = nil, completion: (Void -> Void)? = nil) {
-        instance.removeDeviceOrientationNotification()
+    public class func show(type: HUDType, text: String, time: NSTimeInterval? = nil, completion: HUDCompletedBlock? = nil) {
+        dismiss()
         instance.registerDeviceOrientationNotification()
         var isNone: Bool = false
         let window = UIWindow()
@@ -103,23 +106,24 @@ public extension HUD {
         window.center = getCenter()
         window.hidden = false
         window.addSubview(mainView)
-        windowTemp = window
+        windowsTemp.append(window)
         
         delayDismiss(time, completion: completion)
     }
     
     public class func dismiss() {
-        instance.removeDeviceOrientationNotification()
-        let _ = windowTemp?.subviews.map {
-            $0.removeFromSuperview()
+        if let _ = timer {
+            dispatch_source_cancel(timer!)
+            timer = nil
         }
-        windowTemp?.removeFromSuperview()
-        windowTemp = nil
+        instance.removeDeviceOrientationNotification()
+        windowsTemp.removeAll(keepCapacity: false)
     }
 }
 
 public class HUD: NSObject {
-    private static var windowTemp: UIWindow?
+    private static var windowsTemp: [UIWindow] = []
+    private static var timer: dispatch_source_t?
     private static let instance: HUD = HUD()
     private struct Cache {
         static var imageOfCheckmark: UIImage?
@@ -135,16 +139,25 @@ public class HUD: NSObject {
         }
         return rv.center
     }
-    
+
     // delay dismiss
-    private class func delayDismiss(time: NSTimeInterval?, completion: (Void->Void)?) {
+    private class func delayDismiss(time: NSTimeInterval?, completion: HUDCompletedBlock?) {
         guard let time = time else { return }
         guard time > 0 else { return }
-        let time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(time * Double(NSEC_PER_SEC)))
-        dispatch_after(time_t, dispatch_get_main_queue()) {
-            dismiss()
-            completion?()
+        var timeout = time
+        timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue())
+        dispatch_source_set_timer(timer!, dispatch_walltime(nil, 0), 1 * NSEC_PER_SEC, 0)
+        dispatch_source_set_event_handler(timer!) { _ in
+            if timeout <= 0 {
+                dispatch_async(dispatch_get_main_queue()) {
+                    dismiss()
+                    completion?()
+                }
+            } else {
+                timeout -= 1
+            }
         }
+        dispatch_resume(timer!)
     }
     
     // register notification
@@ -172,8 +185,10 @@ public class HUD: NSObject {
         default:
             break
         }
-        HUD.windowTemp?.center = HUD.getCenter()
-        HUD.windowTemp?.transform = CGAffineTransformMakeRotation(rotation)
+        HUD.windowsTemp.forEach {
+            $0.center = HUD.getCenter()
+            $0.transform = CGAffineTransformMakeRotation(rotation)
+        }
     }
     
     // draw

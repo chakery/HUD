@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBAction func loadingHandler(sender: AnyObject) {
-        HUD.show(.Loading, text: "Loading...")
+        HUD.show(.Loading, text: "Loading...", time: 3)
     }
     
     @IBAction func successHandler(sender: AnyObject) {
