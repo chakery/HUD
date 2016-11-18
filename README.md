@@ -4,12 +4,17 @@ A Simple HUD for iOS 8 and up, Support screen rotation.
 
 # Installation
 
+
+swift2.0+ use `pod 'HUD', '~>1.2.1'`
+
+
 ```
 platform :ios, '8.0'
 use_frameworks!
 
 pod 'HUD', '~>1.3.0'
 ```
+
 
 # Using
 
