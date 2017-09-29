@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -25,7 +29,7 @@
                                 </constraints>
                                 <state key="normal" title="success"/>
                                 <connections>
-                                    <action selector="successHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4va-UM-8WV"/>
+                                    <action selector="successHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bHp-k1-eeU"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uR6-et-yWF">
@@ -36,7 +40,7 @@
                                 </constraints>
                                 <state key="normal" title="error"/>
                                 <connections>
-                                    <action selector="errorHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6nZ-MR-0Mo"/>
+                                    <action selector="errorHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Txq-4U-G4S"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sE6-ps-eQn">
@@ -47,7 +51,7 @@
                                 </constraints>
                                 <state key="normal" title="info"/>
                                 <connections>
-                                    <action selector="infohandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SqP-DO-0aB"/>
+                                    <action selector="infohandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0Cy-DW-HZu"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rzt-JS-nau">
@@ -58,7 +62,7 @@
                                 </constraints>
                                 <state key="normal" title="text"/>
                                 <connections>
-                                    <action selector="textHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uJ8-Ed-VTQ"/>
+                                    <action selector="textHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xlE-Dn-uit"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qgI-8D-DtM">
@@ -69,7 +73,7 @@
                                 </constraints>
                                 <state key="normal" title="dismiss"/>
                                 <connections>
-                                    <action selector="dismissHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jn2-JL-rMf"/>
+                                    <action selector="dismissHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IHZ-tB-hzo"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rdx-5z-6qF">
@@ -80,11 +84,11 @@
                                 </constraints>
                                 <state key="normal" title="loading"/>
                                 <connections>
-                                    <action selector="loadingHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ecp-o3-RnU"/>
+                                    <action selector="loadingHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Du7-ew-M1m"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Rzt-JS-nau" firstAttribute="top" secondItem="sE6-ps-eQn" secondAttribute="bottom" constant="8" id="4HC-ML-8Pf"/>
                             <constraint firstItem="uR6-et-yWF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6Hh-jJ-mCu"/>
@@ -106,7 +110,6 @@
                             </mask>
                         </variation>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

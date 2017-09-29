@@ -133,11 +133,13 @@ open class HUD: NSObject {
     
     // center
     fileprivate class func getCenter() -> CGPoint {
-        let rv = (UIApplication.shared.keyWindow?.subviews.first)!
-        if rv.bounds.width > rv.bounds.height {
-            return CGPoint(x: rv.bounds.height/2, y: rv.bounds.width/2)
+        if let rv = UIApplication.shared.keyWindow?.subviews.first {
+            if rv.bounds.width > rv.bounds.height {
+                return CGPoint(x: rv.bounds.height * 0.5, y: rv.bounds.width * 0.5)
+            }
+            return rv.center
         }
-        return rv.center
+        return .zero
     }
 
     // delay dismiss
@@ -179,11 +181,11 @@ open class HUD: NSObject {
         case .portrait:
             rotation = 0
         case .portraitUpsideDown:
-            rotation = CGFloat(M_PI)
+            rotation = .pi
         case .landscapeLeft:
-            rotation = CGFloat(M_PI/2)
+            rotation = .pi * 0.5
         case .landscapeRight:
-            rotation = CGFloat(M_PI + (M_PI/2))
+            rotation = CGFloat(.pi + (.pi * 0.5))
         default:
             break
         }
@@ -199,7 +201,7 @@ open class HUD: NSObject {
         
         // draw circle
         checkmarkShapePath.move(to: CGPoint(x: 36, y: 18))
-        checkmarkShapePath.addArc(withCenter: CGPoint(x: 18, y: 18), radius: 17.5, startAngle: 0, endAngle: CGFloat(M_PI*2), clockwise: true)
+        checkmarkShapePath.addArc(withCenter: CGPoint(x: 18, y: 18), radius: 17.5, startAngle: 0, endAngle: .pi * 2, clockwise: true)
         checkmarkShapePath.close()
         
         switch type {
@@ -227,7 +229,7 @@ open class HUD: NSObject {
             
             let checkmarkShapePath = UIBezierPath()
             checkmarkShapePath.move(to: CGPoint(x: 18, y: 27))
-            checkmarkShapePath.addArc(withCenter: CGPoint(x: 18, y: 27), radius: 1, startAngle: 0, endAngle: CGFloat(M_PI*2), clockwise: true)
+            checkmarkShapePath.addArc(withCenter: CGPoint(x: 18, y: 27), radius: 1, startAngle: 0, endAngle: .pi * 2, clockwise: true)
             checkmarkShapePath.close()
             
             UIColor.white.setFill()

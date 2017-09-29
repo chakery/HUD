@@ -10,28 +10,27 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBAction func loadingHandler(sender: AnyObject) {
+    @IBAction func loadingHandler(_ sender: UIButton) {
         HUD.show(.loading, text: "Loading...", time: 3)
     }
     
-    @IBAction func successHandler(sender: AnyObject) {
+    @IBAction func successHandler(_ sender: UIButton) {
         HUD.show(.success, text: "Success")
     }
     
-    @IBAction func errorHandler(sender: AnyObject) {
+    @IBAction func errorHandler(_ sender: UIButton) {
         HUD.show(.error, text: "Error")
     }
-   
     
-    @IBAction func infohandler(sender: AnyObject) {
+    @IBAction func infohandler(_ sender: UIButton) {
         HUD.show(.info, text: "Warning")
     }
     
-    @IBAction func textHandler(sender: AnyObject) {
+    @IBAction func textHandler(_ sender: UIButton) {
         HUD.show(.none, text: "Text...")
     }
     
-    @IBAction func dismissHandler(sender: AnyObject) {
+    @IBAction func dismissHandler(_ sender: UIButton) {
         HUD.dismiss()
     }
     
@@ -42,7 +41,6 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
 
 }
 
